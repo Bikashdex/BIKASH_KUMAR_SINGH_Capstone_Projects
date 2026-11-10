@@ -68,12 +68,9 @@ python drift_monitor.py                # Run PSI drift check & auto-retrain trig
 Local URLs & Endpoints
 Service
 URL
-Streamlit Analyst Dashboard
-http://localhost:8501
-API Documentation (Swagger)
-http://localhost:8000/docs
-API Health Check
-http://localhost:8000/health
+Streamlit Analyst Dashboard - http://localhost:8501
+API Documentation (Swagger) - http://localhost:8000/docs
+API Health Check -  http://localhost:8000/health
 Evidently Drift Report
 reports/drift_report.html (Open locally in browser)
 
@@ -108,14 +105,11 @@ npm run dev
 Local URLs
 Service
 URL
-Radiologist Viewer
-http://localhost:5173
-API Docs (Swagger)
-http://localhost:8000/docs (or :8010)
-Health Check
-http://localhost:8000/health
-Orthanc UI
-http://localhost:8042
+Radiologist Viewer - http://localhost:5173
+API Docs (Swagger) - http://localhost:8000/docs (or :8010)
+Health Check - http://localhost:8000/health
+Orthanc UI - http://localhost:8042
+
 
 📂 Repository Contents
 AIML-01-Fraud-Platform/: Source code, K8s manifests, and Streamlit dashboard for the fraud system.
