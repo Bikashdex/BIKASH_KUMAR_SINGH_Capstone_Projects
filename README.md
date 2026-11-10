@@ -43,6 +43,7 @@ Deep learning platform for X-ray/CT/MRI scan analysis with CNN models, Grad-CAM 
 
 ```bash
 ### AIML-01: Real-Time Financial Fraud Detection Platform
+
 # 1. Python 3.11 venv (Recommended for dependency compatibility)
 py -3.11 -m venv .venv
 .venv\Scripts\activate
