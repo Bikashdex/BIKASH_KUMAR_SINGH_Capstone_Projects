@@ -42,6 +42,7 @@ Deep learning platform for X-ray/CT/MRI scan analysis with CNN models, Grad-CAM 
 
 
 ```bash
+### AIML-01: Real-Time Financial Fraud Detection Platform
 # 1. Python 3.11 venv (Recommended for dependency compatibility)
 py -3.11 -m venv .venv
 .venv\Scripts\activate
@@ -73,7 +74,7 @@ API Health Check -  http://localhost:8000/health
 Evidently Drift Report
 reports/drift_report.html (Open locally in browser)
 
-### AIML-01: Real-Time Medical Imaging Assist
+### AIML-01: Real-Time Medical Imaging and Diagnosis System
 
 # 1. Python 3.11 venv (torch==2.4.1 has no cp313 wheels)
 py -3.11 -m venv .venv
