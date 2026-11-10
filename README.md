@@ -74,6 +74,8 @@ API Health Check -  http://localhost:8000/health
 Evidently Drift Report
 reports/drift_report.html (Open locally in browser)
 
+### AIML-01: Real-Time Financial Fraud Detection
+
 # 1. Python 3.11 venv (torch==2.4.1 has no cp313 wheels)
 py -3.11 -m venv .venv
 .venv\Scripts\activate
