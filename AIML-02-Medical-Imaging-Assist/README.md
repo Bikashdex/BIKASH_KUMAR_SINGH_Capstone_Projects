@@ -20,6 +20,10 @@ controls, and every decision is appended to an audit log in SQLite. Grad-CAM map
 
 A second, independent track segments the spleen from abdominal CT volumes using a **3D U-Net in MONAI**.
 
+🔗 Live API: https://aiml-02-medical-imaging-assist.onrender.com/docs
+
+🔗 Live Demo: https://aiml-02-medical-imaging-assist.onrender.com
+
 ## Two model tracks
 
 | Track | Task | Dataset | Model | Headline metric |
