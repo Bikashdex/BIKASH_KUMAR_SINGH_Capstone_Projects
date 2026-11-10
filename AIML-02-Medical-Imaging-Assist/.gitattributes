@@ -1,0 +1,32 @@
+# Line endings. core.autocrlf=true on this machine means a Windows working copy and the Linux checkout used by
+# Docker and CI disagree unless this file says otherwise. Without it, a notebook edited on Windows can come back
+# as a 100 %-changed diff, and the "clean commits" deliverable turns into noise.
+* text=auto
+
+*.py       text eol=lf
+*.md       text eol=lf
+*.yml      text eol=lf
+*.yaml     text eol=lf
+*.json     text eol=lf
+*.ipynb    text eol=lf
+*.csv      text eol=lf
+*.dvc      text eol=lf
+*.gitignore text eol=lf
+.gitignore  text eol=lf
+.gitattributes text eol=lf
+Dockerfile text eol=lf
+docker-compose.yml text eol=lf
+
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.pdf    binary
+*.pt     binary
+*.pth    binary
+*.onnx   binary
+*.joblib binary
+*.dcm    binary
+*.nii    binary
+*.nii.gz binary
+*.zip    binary

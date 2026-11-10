@@ -1,0 +1,54 @@
+{
+  "dataset": "RSNA 2018 Pneumonia Detection Challenge, stage_2 release (label = lung opacity)",
+  "label_file": "stage_2_train_labels.csv",
+  "data_dir": "C:\\Users\\kumar\\Documents\\Qoder\\2026-10-22\\410be6bc\\AIML-02-medical-imaging\\data\\raw\\rsna",
+  "images_dir": "C:\\Users\\kumar\\Documents\\Qoder\\2026-10-22\\410be6bc\\AIML-02-medical-imaging\\data\\raw\\rsna\\stage_2_train_images",
+  "path_base": "C:\\Users\\kumar\\Documents\\Qoder\\2026-10-22\\410be6bc\\AIML-02-medical-imaging\\data\\raw\\rsna",
+  "annotation_rows": 30227,
+  "n_images": 26684,
+  "n_groups": 26684,
+  "images_per_group_max": 1,
+  "row_level_split_leak_pct": 16.804498842209725,
+  "opacity_prevalence_pct": 22.530355269075102,
+  "total_boxes": 9555,
+  "splits": {
+    "train": {
+      "images": 18678,
+      "groups": 18678,
+      "opacity_rate_pct": 22.53
+    },
+    "val": {
+      "images": 4003,
+      "groups": 4003,
+      "opacity_rate_pct": 22.53
+    },
+    "test": {
+      "images": 4003,
+      "groups": 4003,
+      "opacity_rate_pct": 22.53
+    }
+  },
+  "dicom_tags": {
+    "modality": {
+      "CR": 26684
+    },
+    "bits_allocated": [
+      "8"
+    ],
+    "sex_populated": 26684,
+    "age_populated": 26684,
+    "patient_position_populated": 0,
+    "window_center_populated": 0
+  },
+  "demographics": {
+    "sex_counts": {
+      "M": 15166,
+      "F": 11518
+    },
+    "age_median": 49.0,
+    "age_min": 1.0,
+    "age_max": 155.0,
+    "implausible_age_rows": 5
+  },
+  "disclaimer": "For education only. Not for clinical use."
+}

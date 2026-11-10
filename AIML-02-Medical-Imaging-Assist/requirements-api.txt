@@ -1,0 +1,22 @@
+# Runtime pins for the API/ingest image only. Same versions as requirements.txt, minus the training,
+# analysis and versioning stack (monai, dvc, pydrive2, scikit-learn, matplotlib, pytest ...), which the
+# container never imports and which turned a ~250 MB install into a multi-GB one over a flaky link.
+# train == true, serving == false: keep this file in step with requirements.txt when a pin moves.
+torch==2.4.1
+torchvision==0.19.1
+numpy==1.26.4
+Pillow==10.4.0
+
+pydicom==3.0.1
+# python-gdcm is deliberately absent: it is only needed to decode JPEG-compressed DICOM, the RSNA stage_2
+# files the demo uses are uncompressed, and the 3.0.10 pin in requirements.txt no longer exists on PyPI
+# (the index starts at 3.0.17.1 for cp311). Add `python-gdcm==3.0.26` here if compressed studies appear.
+
+fastapi==0.115.0
+# No [standard] extra: on Linux it pulls uvloop, which is not in the wheelhouse, and --no-index then fails
+# the whole install. The extra only adds uvloop/websockets/watchfiles, none of which a single-worker
+# request/response API uses.
+uvicorn==0.30.6
+pydantic==2.9.2
+python-multipart==0.0.12
+httpx==0.27.2

@@ -1,0 +1,6 @@
+outs:
+- md5: 3fd56c2857f39d9f9df084ddadd7c8de.dir
+  size: 3555311924
+  nfiles: 26684
+  hash: md5
+  path: stage_2_train_images

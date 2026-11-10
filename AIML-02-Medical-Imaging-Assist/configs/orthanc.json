@@ -1,0 +1,34 @@
+{
+  "Name": "AIML-02 Orthanc",
+
+  "DicomAet": "AIML02",
+  "DicomPort": 4242,
+
+  "HttpPort": 8042,
+  "RemoteAccessAllowed": true,
+  "ScriptingEnabled": false,
+  "StableAge": 60,
+
+  "AuthenticationEnabled": false,
+
+  "RegisteredPeers": [
+    { "Aet": "AIML02-API", "Ip": "api", "Port": 4243 }
+  ],
+
+  "DICOMweb": {
+    "Enable": true,
+    "Root": "/dicom-web/",
+    "EnableWado": true,
+    "WadoRoot": "/wado",
+    "StoreQuery": true,
+    "ProxyRetrieveUrl": true,
+    "RetrievePnv": true
+  },
+
+  "Indexing": {
+    "Enable": true
+  },
+
+  "MaxPendingInstances": 10,
+  "DicomKeepAliveAfterResponses": 10
+}

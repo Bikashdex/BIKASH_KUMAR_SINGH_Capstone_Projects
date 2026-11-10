@@ -1,0 +1,80 @@
+# --- credentials: never commit these ---
+kaggle.json
+*.pem
+*.key
+.env
+.env.*
+!.env.example
+orthanc-credentials*
+
+# --- data: tracked by DVC, not by git ---
+# Ignore the *files* under data/, never the directories: git cannot re-include a file whose parent directory is
+# excluded, and every `*.dvc` pointer next to the data has to stay committable or the versioning is unverifiable.
+data/raw/**
+data/processed/**
+!data/raw/**/
+!data/processed/**/
+!data/raw/**/*.dvc
+!data/processed/**/*.dvc
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+*.dcm
+*.nii
+*.nii.gz
+*.zip
+
+# --- model weights: tracked by DVC ---
+artifacts/*
+!artifacts/.gitkeep
+*.pt
+*.pth
+*.onnx
+*.joblib
+
+# --- pre-downloaded linux wheels for the API image (tools/fetch_api_wheels.py stages them) ---
+wheelhouse/*.whl
+!wheelhouse/.gitkeep
+
+# --- python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.mypy_cache/
+.ruff_cache/
+
+# --- dvc ---
+.dvc/tmp/
+.dvc/cache/
+
+# --- node / react ---
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+npm-debug.log*
+
+# --- docker / os / ide ---
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.code-workspace
+
+# --- results: the JSON metrics and the figures the report cites are deliverables, so they are tracked.
+# Checkpoint notebooks and ad-hoc experiment dumps are not. ---
+*/ipynb_checkpoints/
+results/experiments/
+
+# Notebooks 03/04/05 write here when RUN_ON == "local" (a CPU smoke run). Scratch, never a deliverable.
+notebooks/_nb03_scratch/
+notebooks/_nb04_scratch/
+notebooks/_nb05_scratch/
+notebooks/_smoke/
+wheelhouse/*.whl
+.env
+frontend/.env

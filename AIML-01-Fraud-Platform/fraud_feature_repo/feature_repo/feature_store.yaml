@@ -1,0 +1,6 @@
+project: fraud_feature_repo
+registry: C:/Users/kumar/Desktop/AIML-01-Fraud-Platform/fraud_feature_repo/data/registry.db
+provider: local
+online_store:
+    type: sqlite
+    path: C:/Users/kumar/Desktop/AIML-01-Fraud-Platform/fraud_feature_repo/data/online_store.db

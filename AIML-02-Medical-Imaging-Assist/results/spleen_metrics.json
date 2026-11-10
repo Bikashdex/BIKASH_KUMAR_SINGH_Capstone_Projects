@@ -1,0 +1,149 @@
+{
+ "task": "MSD Task09_Spleen",
+ "model": "DynUNet (MONAI 1.5.2), deep supervision x2, sliding-window inference",
+ "host": {
+  "run_on": "kaggle",
+  "device": "cuda",
+  "python": "3.13.15",
+  "torch": "2.11.0+cu128",
+  "monai": "1.5.2",
+  "minutes": 119.3
+ },
+ "config": {
+  "seed": 7,
+  "num_downsample": 5,
+  "num_aux_heads": 2,
+  "roi": [
+   128,
+   128,
+   128
+  ],
+  "foreground_ratio": 0.5,
+  "batch_train": 2,
+  "patches_per_epoch": 128,
+  "lr": 0.0001,
+  "weight_decay": 1e-05,
+  "epochs_total": 90,
+  "val_after_epoch": 10,
+  "val_every": 10,
+  "n_val_quick": 3,
+  "sw_batch_size": 2,
+  "sw_overlap": 0.5,
+  "threshold": 0.5,
+  "run_on": "kaggle",
+  "scratch": "/tmp/nb05",
+  "out_dir": "/kaggle/working"
+ },
+ "provenance": {
+  "best_checkpoint": "/kaggle/working/spleen_dynunet_best.pt",
+  "based_on": "MONAI spleen segmentation + DynUNet tutorials, rewritten onto src/data/ct_volume.py and src/models/unet3d.py"
+ },
+ "test_report": {
+  "n": 6,
+  "mean_dice": 0.8585986124285788,
+  "median_dice": 0.912375958397273,
+  "min_dice": 0.5971656344649616,
+  "max_dice": 0.9479842091271521,
+  "n_zero_dice": 0,
+  "n_below_0_5": 0
+ },
+ "per_case": [
+  {
+   "dice": 0.9479842091271521,
+   "pred_voxels": 71785,
+   "ref_voxels": 74882,
+   "pred_volume_mm3": 242274.375,
+   "ref_volume_mm3": 252726.75,
+   "pred_empty": false,
+   "ref_empty": false,
+   "centroid_dist_mm": 0.7171821405367435,
+   "case_id": "spleen_10",
+   "shape_after_resample": [
+    334,
+    334,
+    181
+   ]
+  },
+  {
+   "dice": 0.9351905293273411,
+   "pred_voxels": 38464,
+   "ref_voxels": 39503,
+   "pred_volume_mm3": 129816.0,
+   "ref_volume_mm3": 133322.625,
+   "pred_empty": false,
+   "ref_empty": false,
+   "centroid_dist_mm": 1.871675710917449,
+   "case_id": "spleen_21",
+   "shape_after_resample": [
+    249,
+    249,
+    148
+   ]
+  },
+  {
+   "dice": 0.8464993848574719,
+   "pred_voxels": 18536,
+   "ref_voxels": 16415,
+   "pred_volume_mm3": 62559.0,
+   "ref_volume_mm3": 55400.625,
+   "pred_empty": false,
+   "ref_empty": false,
+   "centroid_dist_mm": 36.59460875856726,
+   "case_id": "spleen_24",
+   "shape_after_resample": [
+    251,
+    251,
+    311
+   ]
+  },
+  {
+   "dice": 0.5971656344649616,
+   "pred_voxels": 47181,
+   "ref_voxels": 105728,
+   "pred_volume_mm3": 159235.875,
+   "ref_volume_mm3": 356832.0,
+   "pred_empty": false,
+   "ref_empty": false,
+   "centroid_dist_mm": 8.058599186443498,
+   "case_id": "spleen_31",
+   "shape_after_resample": [
+    253,
+    253,
+    184
+   ]
+  },
+  {
+   "dice": 0.9201152078232085,
+   "pred_voxels": 72107,
+   "ref_voxels": 81702,
+   "pred_volume_mm3": 243361.125,
+   "ref_volume_mm3": 275744.25,
+   "pred_empty": false,
+   "ref_empty": false,
+   "centroid_dist_mm": 1.7841689752162835,
+   "case_id": "spleen_62",
+   "shape_after_resample": [
+    231,
+    231,
+    264
+   ]
+  },
+  {
+   "dice": 0.9046367089713376,
+   "pred_voxels": 100046,
+   "ref_voxels": 106868,
+   "pred_volume_mm3": 337655.25,
+   "ref_volume_mm3": 360679.5,
+   "pred_empty": false,
+   "ref_empty": false,
+   "centroid_dist_mm": 13.693080680760627,
+   "case_id": "spleen_63",
+   "shape_after_resample": [
+    257,
+    257,
+    198
+   ]
+  }
+ ],
+ "disclaimer": "Education/research prototype. Not for clinical use."
+}

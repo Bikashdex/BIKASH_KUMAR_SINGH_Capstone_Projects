@@ -1,0 +1,179 @@
+{
+  "generated": "2026-10-23 19:20",
+  "dataset": "RSNA 2018 Pneumonia Detection Challenge, stage_2 release (label = lung opacity)",
+  "prevalence_train": 0.2253,
+  "threshold_by_youden_on_val": 0.1628,
+  "subset_sizes": {
+    "level1_pix": 4000,
+    "level1_val": 1500,
+    "level1_test": 2000,
+    "level2_emb": 1200
+  },
+  "baselines": {
+    "L0_constant": {
+      "model": "L0 constant",
+      "n": 4003,
+      "auroc": 0.5,
+      "pr_auc": 0.6127,
+      "threshold": 0.5,
+      "accuracy": 0.7747,
+      "sensitivity": 0.0,
+      "specificity": 1.0,
+      "precision": 0.0,
+      "f1": 0.0,
+      "confusion": {
+        "tn": 3101,
+        "fp": 0,
+        "fn": 902,
+        "tp": 0
+      }
+    },
+    "L1_pixel_train": {
+      "model": "L1 pixel logreg - TRAIN",
+      "n": 4000,
+      "auroc": 0.9037,
+      "pr_auc": 0.7227,
+      "threshold": 0.5,
+      "accuracy": 0.86,
+      "sensitivity": 0.5006,
+      "specificity": 0.9563,
+      "precision": 0.754,
+      "f1": 0.6017,
+      "confusion": {
+        "tn": 3017,
+        "fp": 138,
+        "fn": 422,
+        "tp": 423
+      }
+    },
+    "L1_pixel_val": {
+      "model": "L1 pixel logreg - VAL",
+      "n": 1500,
+      "auroc": 0.752,
+      "pr_auc": 0.4572,
+      "threshold": 0.5,
+      "accuracy": 0.774,
+      "sensitivity": 0.3567,
+      "specificity": 0.8972,
+      "precision": 0.5062,
+      "f1": 0.4185,
+      "confusion": {
+        "tn": 1039,
+        "fp": 119,
+        "fn": 220,
+        "tp": 122
+      }
+    },
+    "L2_frozen_train": {
+      "model": "L2 frozen logreg - TRAIN",
+      "n": 1200,
+      "auroc": 0.9999,
+      "pr_auc": 0.9995,
+      "threshold": 0.5,
+      "accuracy": 0.9925,
+      "sensitivity": 0.968,
+      "specificity": 0.9989,
+      "precision": 0.9959,
+      "f1": 0.9817,
+      "confusion": {
+        "tn": 949,
+        "fp": 1,
+        "fn": 8,
+        "tp": 242
+      }
+    },
+    "L2_frozen_val": {
+      "model": "L2 frozen logreg - VAL",
+      "n": 1200,
+      "auroc": 0.7234,
+      "pr_auc": 0.4052,
+      "threshold": 0.5,
+      "accuracy": 0.7442,
+      "sensitivity": 0.3956,
+      "specificity": 0.8468,
+      "precision": 0.432,
+      "f1": 0.413,
+      "confusion": {
+        "tn": 785,
+        "fp": 142,
+        "fn": 165,
+        "tp": 108
+      }
+    },
+    "L1_pixel_test": {
+      "model": "L1 pixel logreg - TEST",
+      "n": 2000,
+      "auroc": 0.74,
+      "pr_auc": 0.4185,
+      "threshold": 0.1628467183217487,
+      "accuracy": 0.671,
+      "sensitivity": 0.6982,
+      "specificity": 0.6632,
+      "precision": 0.3717,
+      "f1": 0.4851,
+      "confusion": {
+        "tn": 1032,
+        "fp": 524,
+        "fn": 134,
+        "tp": 310
+      }
+    },
+    "L2_frozen_test": {
+      "model": "L2 frozen logreg - TEST",
+      "n": 1000,
+      "auroc": 0.725,
+      "pr_auc": 0.4369,
+      "threshold": 0.1628467183217487,
+      "accuracy": 0.726,
+      "sensitivity": 0.5574,
+      "specificity": 0.7778,
+      "precision": 0.4352,
+      "f1": 0.4888,
+      "confusion": {
+        "tn": 595,
+        "fp": 170,
+        "fn": 104,
+        "tp": 131
+      }
+    }
+  },
+  "test_slices": [
+    {
+      "slice_type": "sex",
+      "slice": "F",
+      "n": 864,
+      "positives": 192,
+      "auroc": 0.7274
+    },
+    {
+      "slice_type": "sex",
+      "slice": "M",
+      "n": 1136,
+      "positives": 252,
+      "auroc": 0.75
+    },
+    {
+      "slice_type": "age band",
+      "slice": "<40",
+      "n": 704,
+      "positives": 179,
+      "auroc": 0.7625
+    },
+    {
+      "slice_type": "age band",
+      "slice": "40-59",
+      "n": 881,
+      "positives": 185,
+      "auroc": 0.7557
+    },
+    {
+      "slice_type": "age band",
+      "slice": "60-79",
+      "n": 397,
+      "positives": 75,
+      "auroc": 0.6576
+    }
+  ],
+  "next": "Level 3 (fine-tuned DenseNet121) is measured in 03_train_densenet.ipynb against these numbers.",
+  "disclaimer": "For education only. Not for clinical use."
+}

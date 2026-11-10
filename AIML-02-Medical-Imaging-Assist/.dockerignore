@@ -1,0 +1,9 @@
+.git
+data/raw
+notebooks
+frontend/node_modules
+_nb05_scratch
+.qoder
+results
+*.ipynb_checkpoints
+wheelhouse/*.whl.bak

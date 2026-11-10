@@ -1,0 +1,403 @@
+{
+ "generated": "2026-10-26 07:19",
+ "host": {
+  "run_on": "kaggle",
+  "device": "cuda",
+  "torch": "2.11.0+cu128",
+  "python": "3.13.15",
+  "seed": 7
+ },
+ "checkpoint": {
+  "path": "/kaggle/input/notebooks/bikash24795/aiml-02-notebook-03-densenet121-chest-x-ray/densenet121_lungopacity.pt",
+  "epoch": 4,
+  "threshold": 0.5107557773590088,
+  "trained_on_run_on": "kaggle",
+  "config": {
+   "run_on": "kaggle",
+   "repo_url": "",
+   "drive_root": "/kaggle/working",
+   "zip_name": "stage_2_train_images.zip",
+   "local_images": "/kaggle/input/competitions/rsna-pneumonia-detection-challenge/stage_2_train_images",
+   "cache_root": "/tmp/rsna_cache",
+   "repo_results": "/kaggle/working",
+   "out_dir": "/kaggle/working",
+   "seed": 7,
+   "cache_size": 448,
+   "train_size": 224,
+   "batch_train": 32,
+   "batch_eval": 64,
+   "epochs_frozen": 2,
+   "epochs_total": 10,
+   "lr_head": 0.001,
+   "lr_backbone": 0.0001,
+   "patience": 3
+  }
+ },
+ "notebook_03_metrics": {
+  "test_auroc": 0.8819,
+  "bar_to_beat": 0.74,
+  "verdict": "beats the L1 baseline"
+ },
+ "test_subset": {
+  "n": 4003,
+  "prevalence": 0.2253,
+  "auroc": 0.8819,
+  "pr_auc": 0.7086,
+  "threshold": 0.5108,
+  "sensitivity": 0.7661,
+  "specificity": 0.8055,
+  "confusion": {
+   "tn": 2498,
+   "fp": 603,
+   "fn": 211,
+   "tp": 691
+  }
+ },
+ "preprocessing": {
+  "cache_size": 448,
+  "model_input": 224,
+  "normalisation_mean": [
+   0.485,
+   0.456,
+   0.406
+  ],
+  "normalisation_std": [
+   0.229,
+   0.224,
+   0.225
+  ],
+  "windowing": "src/data/dicom_io.py:to_uint8"
+ },
+ "gradcam": {
+  "target_layer": "features.denseblock4",
+  "maps": 300,
+  "median_in_body_fraction": 0.5403,
+  "maps_with_under_half_in_body": 130,
+  "by_label": {
+   "0": 0.4842,
+   "1": 0.7073
+  },
+  "resolution_note": "7x7 grid upsampled to 448px; overlay is on the uncropped render while the model saw a 224px centre crop"
+ },
+ "fairness": {
+  "sex": {
+   "table": [
+    {
+     "group": "F",
+     "n": 1704,
+     "positives": 372,
+     "opacity_rate": 0.2183,
+     "auroc": 0.8919,
+     "ci95": [
+      0.8764,
+      0.9083
+     ],
+     "sens_at_thr": 0.7715,
+     "spec_at_thr": 0.8206,
+     "median_in_body_fraction": 0.5423
+    },
+    {
+     "group": "M",
+     "n": 2299,
+     "positives": 530,
+     "opacity_rate": 0.2305,
+     "auroc": 0.8743,
+     "ci95": [
+      0.8604,
+      0.8902
+     ],
+     "sens_at_thr": 0.7623,
+     "spec_at_thr": 0.7942,
+     "median_in_body_fraction": 0.5395
+    }
+   ],
+   "max_gap": {
+    "max_gap": 0.0176,
+    "best": "F",
+    "worst": "M"
+   }
+  },
+  "age_band": {
+   "table": [
+    {
+     "group": "0-39",
+     "n": 1332,
+     "positives": 341,
+     "opacity_rate": 0.256,
+     "auroc": 0.8945,
+     "ci95": [
+      0.8744,
+      0.9113
+     ],
+     "sens_at_thr": 0.7947,
+     "spec_at_thr": 0.8103,
+     "median_in_body_fraction": 0.4908
+    },
+    {
+     "group": "40-59",
+     "n": 1708,
+     "positives": 377,
+     "opacity_rate": 0.2207,
+     "auroc": 0.8908,
+     "ci95": [
+      0.8748,
+      0.9083
+     ],
+     "sens_at_thr": 0.7745,
+     "spec_at_thr": 0.8092,
+     "median_in_body_fraction": 0.5546
+    },
+    {
+     "group": "60-79",
+     "n": 924,
+     "positives": 176,
+     "opacity_rate": 0.1905,
+     "auroc": 0.8433,
+     "ci95": [
+      0.8091,
+      0.8724
+     ],
+     "sens_at_thr": 0.6989,
+     "spec_at_thr": 0.7968,
+     "median_in_body_fraction": 0.57
+    },
+    {
+     "group": "80+",
+     "n": 39,
+     "positives": 8,
+     "opacity_rate": 0.2051,
+     "auroc": 0.6855,
+     "ci95": [
+      0.453,
+      0.9476
+     ],
+     "sens_at_thr": 0.625,
+     "spec_at_thr": 0.7097,
+     "median_in_body_fraction": 0.7688
+    }
+   ],
+   "max_gap": {
+    "max_gap": 0.209,
+    "best": "0-39",
+    "worst": "80+"
+   }
+  },
+  "class_source": {
+   "table": [
+    {
+     "group": "Lung Opacity",
+     "n": 902,
+     "positives": 902,
+     "opacity_rate": 1.0,
+     "auroc": null,
+     "ci95": null,
+     "sens_at_thr": 0.7661,
+     "spec_at_thr": null,
+     "median_in_body_fraction": 0.7073
+    },
+    {
+     "group": "No Lung Opacity / Not Normal",
+     "n": 1770,
+     "positives": 0,
+     "opacity_rate": 0.0,
+     "auroc": null,
+     "ci95": null,
+     "sens_at_thr": null,
+     "spec_at_thr": 0.6667,
+     "median_in_body_fraction": 0.5769
+    },
+    {
+     "group": "Normal",
+     "n": 1331,
+     "positives": 0,
+     "opacity_rate": 0.0,
+     "auroc": null,
+     "ci95": null,
+     "sens_at_thr": null,
+     "spec_at_thr": 0.9902,
+     "median_in_body_fraction": 0.3368
+    }
+   ],
+   "max_gap": null
+  },
+  "sex_x_age": {
+   "table": [
+    {
+     "group": "('F', '0-39')",
+     "n": 556,
+     "positives": 131,
+     "opacity_rate": 0.2356,
+     "auroc": 0.903,
+     "ci95": [
+      0.8756,
+      0.9285
+     ],
+     "sens_at_thr": 0.7863,
+     "spec_at_thr": 0.8306,
+     "median_in_body_fraction": 0.5071
+    },
+    {
+     "group": "('F', '40-59')",
+     "n": 768,
+     "positives": 170,
+     "opacity_rate": 0.2214,
+     "auroc": 0.8936,
+     "ci95": [
+      0.8701,
+      0.917
+     ],
+     "sens_at_thr": 0.7647,
+     "spec_at_thr": 0.8144,
+     "median_in_body_fraction": 0.5278
+    },
+    {
+     "group": "('F', '60-79')",
+     "n": 363,
+     "positives": 69,
+     "opacity_rate": 0.1901,
+     "auroc": 0.8708,
+     "ci95": [
+      0.8233,
+      0.9124
+     ],
+     "sens_at_thr": 0.7536,
+     "spec_at_thr": 0.8231,
+     "median_in_body_fraction": 0.5897
+    },
+    {
+     "group": "('F', '80+')",
+     "n": 17,
+     "positives": 2,
+     "opacity_rate": 0.1176,
+     "auroc": 0.9333,
+     "ci95": [
+      0.7857,
+      1.0
+     ],
+     "sens_at_thr": 1.0,
+     "spec_at_thr": 0.7333,
+     "median_in_body_fraction": 0.8318
+    },
+    {
+     "group": "('M', '0-39')",
+     "n": 776,
+     "positives": 210,
+     "opacity_rate": 0.2706,
+     "auroc": 0.8889,
+     "ci95": [
+      0.8644,
+      0.9129
+     ],
+     "sens_at_thr": 0.8,
+     "spec_at_thr": 0.7951,
+     "median_in_body_fraction": 0.485
+    },
+    {
+     "group": "('M', '40-59')",
+     "n": 940,
+     "positives": 207,
+     "opacity_rate": 0.2202,
+     "auroc": 0.8885,
+     "ci95": [
+      0.8624,
+      0.9114
+     ],
+     "sens_at_thr": 0.7826,
+     "spec_at_thr": 0.8049,
+     "median_in_body_fraction": 0.5921
+    },
+    {
+     "group": "('M', '60-79')",
+     "n": 561,
+     "positives": 107,
+     "opacity_rate": 0.1907,
+     "auroc": 0.8231,
+     "ci95": [
+      0.7842,
+      0.8617
+     ],
+     "sens_at_thr": 0.6636,
+     "spec_at_thr": 0.7797,
+     "median_in_body_fraction": 0.5415
+    },
+    {
+     "group": "('M', '80+')",
+     "n": 22,
+     "positives": 6,
+     "opacity_rate": 0.2727,
+     "auroc": 0.6042,
+     "ci95": [
+      0.2867,
+      0.8947
+     ],
+     "sens_at_thr": 0.5,
+     "spec_at_thr": 0.6875,
+     "median_in_body_fraction": 0.6455
+    }
+   ],
+   "max_gap": {
+    "max_gap": 0.3291,
+    "best": "('F', '80+')",
+    "worst": "('M', '80+')"
+   }
+  }
+ },
+ "metadata_source": "split_csv",
+ "missing_data": [
+  {
+   "item": "test images with no 448px render in the cache",
+   "n_missing": 0,
+   "n_total": 4003,
+   "pct_missing": 0.0,
+   "policy": "rendered as an all-black frame so one failed decode cannot lose an epoch; the path is kept in densenet_metrics.json"
+  },
+  {
+   "item": "PatientSex empty or unreadable",
+   "n_missing": 0,
+   "n_total": 4003,
+   "pct_missing": 0.0,
+   "policy": "kept in the predictions, grouped as 'unknown', excluded from the sex table's gap arithmetic"
+  },
+  {
+   "item": "PatientAge empty or unreadable",
+   "n_missing": 0,
+   "n_total": 4003,
+   "pct_missing": 0.0,
+   "policy": "same: an 'unknown' age band, never imputed by the cohort median"
+  },
+  {
+   "item": "test images whose radiological class could not be joined",
+   "n_missing": 0,
+   "n_total": 4003,
+   "pct_missing": 0.0,
+   "policy": "the label-source slice then reports one 'unavailable' group instead of guessing a class; the binary label itself never came from this file, so no prediction depends on it"
+  },
+  {
+   "item": "duplicate image paths in the predicted set",
+   "n_missing": 0,
+   "n_total": 4003,
+   "pct_missing": 0.0,
+   "policy": "would be a rows-vs-images leak; notebook 01 splits by patient, not by row"
+  },
+  {
+   "item": "test images sharing a PatientID with another test image",
+   "n_missing": 0,
+   "n_total": 4003,
+   "pct_missing": 0.0,
+   "policy": "allowed: a patient can contribute several films; splits are held apart by PatientID, which the cell above asserts"
+  }
+ ],
+ "limitations": [
+  "Grad-CAM attributes a decision to image regions; it does not identify a finding and is not localisation ground truth.",
+  "Single-institution public challenge data; sex and age come from headers, not from any clinical annotation.",
+  "Subgroup gaps are measured differences, not proven model bias - case mix and prevalence differ by group.",
+  "PatientPosition is empty across this archive, so AP/PA projection effects cannot be conditioned on or tested.",
+  "For education only. Not for clinical use. No regulatory clearance."
+ ],
+ "artifacts": {
+  "gallery_png": "/kaggle/working/gradcam_gallery.png",
+  "focus_csv": "/kaggle/working/gradcam_focus.csv",
+  "predictions_csv": "/kaggle/working/test_predictions_with_metadata.csv",
+  "audit_csv": "/kaggle/working/missing_data_audit.csv"
+ }
+}

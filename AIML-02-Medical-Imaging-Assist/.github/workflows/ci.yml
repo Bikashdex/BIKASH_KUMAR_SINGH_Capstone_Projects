@@ -1,0 +1,48 @@
+name: ci
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      # The old comment here claimed the suite only needed the data and DICOM libraries. It does not:
+      # src/api/main.py imports torch at module level, so a pytest-only environment fails at *collection*
+      # on 7 of 10 test modules - which is why this job went red without ever running a test.
+      # Torch comes from the CPU index because the default wheel is a multi-GB CUDA download, and MONAI is
+      # installed with --no-deps so pip cannot pull that CUDA torch back in behind it.
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov pandas numpy pydicom pyyaml fastapi httpx python-multipart pillow
+          pip install --index-url https://download.pytorch.org/whl/cpu torch torchvision
+          pip install --no-deps monai nibabel
+
+      - name: Run tests
+        run: pytest -q --cov=src --cov-report=term-missing
+
+      - name: Verify no credentials or PHI are tracked
+        run: |
+          # The *.dvc pointers ARE meant to be tracked - they hold md5 digests and byte counts, never pixels.
+          # Matching on "anything under data/ with a dot" would flag them, so the payload extensions are listed
+          # explicitly instead.
+          hits=$(git ls-files | grep -Ei 'kaggle\.json$|\.dcm$|\.nii(\.gz)?$|\.zip$|^data/(raw|processed)/.+\.(csv|json|parquet|png|jpg)$' || true)
+          if [ -n "$hits" ]; then
+            echo "Found tracked files that should stay out of git:"
+            echo "$hits"
+            exit 1
+          fi
+
+      - name: Verify the education-only disclaimer is present
+        run: grep -qi "not for clinical use" README.md

@@ -1,0 +1,76 @@
+seed: 7
+
+paths:
+  raw_data: data/raw/rsna
+  processed_data: data/processed
+  artifacts: artifacts
+  results: results
+
+classification:
+  dataset: rsna-pneumonia-detection-challenge    # stage_2 release; the label is the lung-opacity sign
+  target: lung_opacity             # 1 = opacity present, 0 = anything else (normal OR other abnormality)
+  patient_col: patient_id          # unique per image in this release - see dataset_card.md
+  image_col: dicom_rel             # relative to results/eda_summary.json:path_base
+  label_col: label
+  image_size: 224
+  normalise_mean: [0.485, 0.456, 0.406]
+  normalise_std: [0.229, 0.224, 0.225]
+  fractions: [0.70, 0.15, 0.15]   # grouped split, never a plain row shuffle: rows are bounding boxes
+  model: densenet121
+  pretrained: true
+  freeze_backbone_epochs: 1
+  batch_size: 32
+  epochs: 12
+  lr: 0.0001
+  weight_decay: 0.00001
+  dropout: 0.5
+  label_smoothing: 0.05
+  early_stopping_patience: 3
+  monitor: val_auroc
+  threshold_grid: [0.05, 0.95, 0.01]
+  threshold_rule: youden_j_on_val  # 0.5 is not a screening threshold
+  # patient_position is empty on all 26,684 files, so the PA/AP view slice cannot be computed here.
+  # label_source splits the negatives into "Normal" and "abnormal, but not opacity" - the more
+  # informative slice in this dataset.
+  fairness_slices: [patient_sex, age_band, label_source]
+  age_exclusions: [1, 110]         # 5 images carry impossible ages; kept as images, dropped from slices
+
+segmentation:
+  dataset: MSD_Task09_Spleen
+  modality: CT
+  foreground_label: 1
+  spacing: [1.5, 1.5, 1.5]
+  intensity_window: [-150, 200]     # soft-tissue CT window
+  crop_size: [96, 128, 96]
+  batch_size: 2
+  epochs: 200
+  net: DynUNet
+  net_kwargs:
+    spatial_dims: 3
+    in_channels: 1
+    out_channels: 2
+    kernel_size: [[3,3,3],[3,3,3],[3,3,3],[3,3,3],[3,3,3],[3,3,3]]
+    stride: [[1,1,1],[2,2,2],[2,2,2],[2,2,2],[2,2,2],[2,2,2]]
+    deep_supervision: true
+  loss: dice_ce
+  sliding_window_roi: [192, 192, 192]
+  metric: dice
+
+services:
+  api_host: 0.0.0.0
+  api_port: 8000
+  orthanc_url: http://localhost:8042
+  audit_db_url: sqlite:///data/audit.db
+  poll_interval_seconds: 5
+
+monitoring:
+  reference_stats_path: results/train_pixel_stats.json
+  window_size: 200
+  psi_warn: 0.2
+  psi_alert: 0.5
+
+compliance:
+  intended_use: education_only
+  clinical_use: false
+  disclaimer: >
+    For education only. Not a medical device. Not for diagnostic or treatment decisions.

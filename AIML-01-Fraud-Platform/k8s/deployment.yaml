@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fraud-api
+  labels:
+    app: fraud-api
+spec:
+  replicas: 2                # 2 identical pods = high availability
+  selector:
+    matchLabels:
+      app: fraud-api
+  template:
+    metadata:
+      labels:
+        app: fraud-api
+    spec:
+      containers:
+      - name: fraud-api
+        image: fraud-api:latest
+        imagePullPolicy: IfNotPresent      # use the local Docker image
+        ports:
+        - containerPort: 8000
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "500m"

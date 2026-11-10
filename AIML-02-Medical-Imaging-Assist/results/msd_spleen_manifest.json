@@ -1,0 +1,35 @@
+{
+ "task": "Task09_Spleen",
+ "url": "https://msd-for-monai.s3-us-west-2.amazonaws.com/Task09_Spleen.tar",
+ "tar_md5_expected": "410d4a301da4e5b2f6f86ec3ddba524e",
+ "imagesTr": {
+  "n": 41,
+  "appledouble_entries_ignored": 41,
+  "total_bytes": 1125669767,
+  "first": [
+   "spleen_10.nii.gz",
+   "spleen_12.nii.gz",
+   "spleen_13.nii.gz"
+  ],
+  "last": [
+   "spleen_63.nii.gz",
+   "spleen_8.nii.gz",
+   "spleen_9.nii.gz"
+  ]
+ },
+ "labelsTr": {
+  "n": 41,
+  "appledouble_entries_ignored": 41,
+  "total_bytes": 1195749,
+  "first": [
+   "spleen_10.nii.gz",
+   "spleen_12.nii.gz",
+   "spleen_13.nii.gz"
+  ],
+  "last": [
+   "spleen_63.nii.gz",
+   "spleen_8.nii.gz",
+   "spleen_9.nii.gz"
+  ]
+ }
+}

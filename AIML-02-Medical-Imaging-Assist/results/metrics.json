@@ -1,0 +1,256 @@
+{
+  "generated": "2026-10-28",
+  "about": "Index of the measured results, one file the reviewer can open instead of five. Every value below is copied programmatically from the source named in `sources`; tests/test_metrics_summary.py fails if this file drifts from any of them. Numbers not stored here (the AUROC bootstrap CI, the per-subgroup tables) live in the notebooks and the docs.",
+  "disclaimer": "For education only. Not for clinical use.",
+  "sources": {
+    "results/densenet_metrics.json": "track A training history, threshold, val/test scores, confusion counts",
+    "results/baseline_metrics.json": "L0/L1/L2 baselines and the bar the DenseNet had to beat",
+    "results/calibration.json": "post-hoc calibration on the same 4,003 test predictions",
+    "results/gradcam_fairness_summary.json": "Grad-CAM focus, subgroup tables, missing-data audit",
+    "results/spleen_metrics.json": "track B (MONAI DynUNet) test Dice and run configuration",
+    "results/plots/confusion_matrix.png": "the track A test confusion matrix, plotted from the saved predictions"
+  },
+  "track_a_classification": {
+    "dataset": "RSNA 2018 Pneumonia Detection Challenge, stage_2 release (label = lung opacity)",
+    "model": "torchvision densenet121, IMAGENET1K_V1, head replaced by Linear(1024,1)",
+    "runtime": {
+      "host": "kaggle",
+      "device": "cuda",
+      "torch": "2.11.0+cu128",
+      "cuda": "12.8",
+      "seed": 7,
+      "python": "3.13.15"
+    },
+    "trained": {
+      "generated": "2026-10-26 07:11",
+      "epochs_run": 8,
+      "best_epoch": 4
+    },
+    "threshold": 0.5108,
+    "threshold_source": "Youden's J maximised on the validation split, then frozen for val and test",
+    "val": {
+      "n": 4003,
+      "auroc": 0.8882,
+      "pr_auc": 0.7096,
+      "threshold": 0.5108,
+      "accuracy": 0.8191,
+      "sensitivity": 0.8104,
+      "specificity": 0.8217,
+      "precision": 0.5693,
+      "f1": 0.6688,
+      "confusion": {
+        "tn": 2548,
+        "fp": 553,
+        "fn": 171,
+        "tp": 731
+      }
+    },
+    "test": {
+      "n": 4003,
+      "auroc": 0.8819,
+      "pr_auc": 0.7085,
+      "threshold": 0.5108,
+      "accuracy": 0.7967,
+      "sensitivity": 0.7661,
+      "specificity": 0.8055,
+      "precision": 0.534,
+      "f1": 0.6293,
+      "confusion": {
+        "tn": 2498,
+        "fp": 603,
+        "fn": 211,
+        "tp": 691
+      }
+    },
+    "bar_to_beat_test_auroc": 0.74,
+    "verdict": "beats the L1 baseline"
+  },
+  "baselines": {
+    "threshold": 0.1628,
+    "L0_constant": {
+      "model": "L0 constant",
+      "n": 4003,
+      "auroc": 0.5,
+      "pr_auc": 0.6127,
+      "threshold": 0.5,
+      "sensitivity": 0.0,
+      "specificity": 1.0
+    },
+    "L1_pixel_logreg_test": {
+      "model": "L1 pixel logreg - TEST",
+      "n": 2000,
+      "auroc": 0.74,
+      "pr_auc": 0.4185,
+      "threshold": 0.1628,
+      "sensitivity": 0.6982,
+      "specificity": 0.6632
+    },
+    "L2_frozen_resnet18_logreg_test": {
+      "model": "L2 frozen logreg - TEST",
+      "n": 1000,
+      "auroc": 0.725,
+      "pr_auc": 0.4369,
+      "threshold": 0.1628,
+      "sensitivity": 0.5574,
+      "specificity": 0.7778
+    }
+  },
+  "calibration": {
+    "n": 4003,
+    "prevalence_test": 0.2253,
+    "auroc": 0.8819,
+    "brier": 0.1323,
+    "log_loss": 0.4034,
+    "ece_10bin": 0.1256,
+    "ece_95ci_bootstrap": [
+      0.1147,
+      0.136
+    ],
+    "mce_10bin": 0.3152,
+    "reading": "over-confident: mean probability 0.3509 against a 0.2253 base rate is a ranking score, not a risk"
+  },
+  "fairness": {
+    "test_subset": {
+      "n": 4003,
+      "prevalence": 0.2253,
+      "auroc": 0.8819,
+      "pr_auc": 0.7086,
+      "threshold": 0.5108,
+      "sensitivity": 0.7661,
+      "specificity": 0.8055,
+      "confusion": {
+        "tn": 2498,
+        "fp": 603,
+        "fn": 211,
+        "tp": 691
+      }
+    },
+    "sex": {
+      "table": [
+        {
+          "group": "F",
+          "n": 1704,
+          "positives": 372,
+          "opacity_rate": 0.2183,
+          "auroc": 0.8919,
+          "ci95": [
+            0.8764,
+            0.9083
+          ],
+          "sens_at_thr": 0.7715,
+          "spec_at_thr": 0.8206,
+          "median_in_body_fraction": 0.5423
+        },
+        {
+          "group": "M",
+          "n": 2299,
+          "positives": 530,
+          "opacity_rate": 0.2305,
+          "auroc": 0.8743,
+          "ci95": [
+            0.8604,
+            0.8902
+          ],
+          "sens_at_thr": 0.7623,
+          "spec_at_thr": 0.7942,
+          "median_in_body_fraction": 0.5395
+        }
+      ],
+      "max_gap": {
+        "max_gap": 0.0176,
+        "best": "F",
+        "worst": "M"
+      }
+    },
+    "age_band_max_gap": {
+      "max_gap": 0.209,
+      "best": "0-39",
+      "worst": "80+"
+    },
+    "gradcam": {
+      "target_layer": "features.denseblock4",
+      "maps": 300,
+      "median_in_body_fraction": 0.5403,
+      "maps_with_under_half_in_body": 130,
+      "median_in_body_fraction_by_label": {
+        "0": 0.4842,
+        "1": 0.7073
+      },
+      "resolution_note": "7x7 grid upsampled to 448px; overlay is on the uncropped render while the model saw a 224px centre crop"
+    },
+    "missing_data": [
+      {
+        "item": "test images with no 448px render in the cache",
+        "n_missing": 0,
+        "n_total": 4003,
+        "pct_missing": 0.0,
+        "policy": "rendered as an all-black frame so one failed decode cannot lose an epoch; the path is kept in densenet_metrics.json"
+      },
+      {
+        "item": "PatientSex empty or unreadable",
+        "n_missing": 0,
+        "n_total": 4003,
+        "pct_missing": 0.0,
+        "policy": "kept in the predictions, grouped as 'unknown', excluded from the sex table's gap arithmetic"
+      },
+      {
+        "item": "PatientAge empty or unreadable",
+        "n_missing": 0,
+        "n_total": 4003,
+        "pct_missing": 0.0,
+        "policy": "same: an 'unknown' age band, never imputed by the cohort median"
+      },
+      {
+        "item": "test images whose radiological class could not be joined",
+        "n_missing": 0,
+        "n_total": 4003,
+        "pct_missing": 0.0,
+        "policy": "the label-source slice then reports one 'unavailable' group instead of guessing a class; the binary label itself never came from this file, so no prediction depends on it"
+      },
+      {
+        "item": "duplicate image paths in the predicted set",
+        "n_missing": 0,
+        "n_total": 4003,
+        "pct_missing": 0.0,
+        "policy": "would be a rows-vs-images leak; notebook 01 splits by patient, not by row"
+      },
+      {
+        "item": "test images sharing a PatientID with another test image",
+        "n_missing": 0,
+        "n_total": 4003,
+        "pct_missing": 0.0,
+        "policy": "allowed: a patient can contribute several films; splits are held apart by PatientID, which the cell above asserts"
+      }
+    ],
+    "limitations": [
+      "Grad-CAM attributes a decision to image regions; it does not identify a finding and is not localisation ground truth.",
+      "Single-institution public challenge data; sex and age come from headers, not from any clinical annotation.",
+      "Subgroup gaps are measured differences, not proven model bias - case mix and prevalence differ by group.",
+      "PatientPosition is empty across this archive, so AP/PA projection effects cannot be conditioned on or tested.",
+      "For education only. Not for clinical use. No regulatory clearance."
+    ]
+  },
+  "track_b_segmentation": {
+    "task": "MSD Task09_Spleen",
+    "model": "DynUNet (MONAI 1.5.2), deep supervision x2, sliding-window inference",
+    "runtime": {
+      "run_on": "kaggle",
+      "device": "cuda",
+      "python": "3.13.15",
+      "torch": "2.11.0+cu128",
+      "monai": "1.5.2",
+      "minutes": 119.3
+    },
+    "test": {
+      "n": 6,
+      "mean_dice": 0.8585986124285788,
+      "median_dice": 0.912375958397273,
+      "min_dice": 0.5971656344649616,
+      "max_dice": 0.9479842091271521,
+      "n_zero_dice": 0,
+      "n_below_0_5": 0
+    },
+    "config_epochs": 90,
+    "per_case_csv": "results/spleen_per_case.csv"
+  }
+}

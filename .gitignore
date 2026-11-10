@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+
+# Large data files
+*.csv
+*.parquet
+*.pkl
+!requirements*.txt
+
+# Runtime logs
+*.log
+predictions_log.csv
+feedback_log.csv
+
+# Local environments
+.DS_Store
+Thumbs.db

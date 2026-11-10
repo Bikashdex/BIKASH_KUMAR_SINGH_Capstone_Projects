@@ -1,0 +1,5 @@
+outs:
+- md5: c3bb15f6d279cfe39e09da8903902478
+  size: 1647396
+  hash: md5
+  path: stage_2_detailed_class_info.csv

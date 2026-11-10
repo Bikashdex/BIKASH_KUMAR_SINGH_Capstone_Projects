@@ -1,0 +1,110 @@
+{
+ "source": "results\\test_predictions_with_metadata.csv",
+ "n": 4003,
+ "prevalence": 0.2253,
+ "mean_probability": 0.3509,
+ "auroc": 0.8819,
+ "brier": 0.1323,
+ "log_loss": 0.4034,
+ "ece_10bin": 0.1256,
+ "ece_95ci_bootstrap": [
+  0.1147,
+  0.136
+ ],
+ "mce_10bin": 0.3152,
+ "threshold": 0.5108,
+ "bins": [
+  {
+   "bin": 0,
+   "lo": 0.0,
+   "hi": 0.1,
+   "n": 1228,
+   "mean_prob": 0.0359,
+   "observed": 0.0106,
+   "gap": 0.0253
+  },
+  {
+   "bin": 1,
+   "lo": 0.1,
+   "hi": 0.2,
+   "n": 458,
+   "mean_prob": 0.1462,
+   "observed": 0.0611,
+   "gap": 0.0851
+  },
+  {
+   "bin": 2,
+   "lo": 0.2,
+   "hi": 0.3,
+   "n": 417,
+   "mean_prob": 0.2474,
+   "observed": 0.0935,
+   "gap": 0.1539
+  },
+  {
+   "bin": 3,
+   "lo": 0.3,
+   "hi": 0.4,
+   "n": 318,
+   "mean_prob": 0.3499,
+   "observed": 0.1761,
+   "gap": 0.1738
+  },
+  {
+   "bin": 4,
+   "lo": 0.4,
+   "hi": 0.5,
+   "n": 254,
+   "mean_prob": 0.4486,
+   "observed": 0.2441,
+   "gap": 0.2045
+  },
+  {
+   "bin": 5,
+   "lo": 0.5,
+   "hi": 0.6,
+   "n": 318,
+   "mean_prob": 0.5492,
+   "observed": 0.3145,
+   "gap": 0.2348
+  },
+  {
+   "bin": 6,
+   "lo": 0.6,
+   "hi": 0.7,
+   "n": 281,
+   "mean_prob": 0.6498,
+   "observed": 0.3345,
+   "gap": 0.3152
+  },
+  {
+   "bin": 7,
+   "lo": 0.7,
+   "hi": 0.8,
+   "n": 289,
+   "mean_prob": 0.7511,
+   "observed": 0.5225,
+   "gap": 0.2286
+  },
+  {
+   "bin": 8,
+   "lo": 0.8,
+   "hi": 0.9,
+   "n": 233,
+   "mean_prob": 0.8463,
+   "observed": 0.7339,
+   "gap": 0.1124
+  },
+  {
+   "bin": 9,
+   "lo": 0.9,
+   "hi": 1.0,
+   "n": 207,
+   "mean_prob": 0.9363,
+   "observed": 0.9082,
+   "gap": 0.0281
+  }
+ ],
+ "reading": "Raw sigmoid scores are systematically higher than the observed positive rate (mean score 0.351 vs 22.5% prevalence; ECE 0.126). The training loss used pos_weight=3.4387, so the score ranks well (AUROC 0.8819) but must not be read as a probability. The 0.5108 threshold was chosen on validation for this reason; a Platt/isotonic calibration layer is future work, not a clinical claim.",
+ "disclaimer": "Education only. Not for clinical use."
+}

@@ -1,0 +1,67 @@
+services:
+  orthanc:
+    image: orthancteam/orthanc:latest
+    # Pin this to the exact tag you actually pulled: docker image inspect orthancteam/orthanc --format '{{.RepoTags}}'
+    container_name: aiml02-orthanc
+    ports:
+      - "8042:8042"   # REST + DICOMweb (HTTP)
+      - "4242:4242"   # DICOM receive port (C-STORE)
+    volumes:
+      - orthanc-db:/var/lib/orthanc/db
+      - ./configs/orthanc.json:/etc/orthanc/orthanc.json:ro
+    restart: unless-stopped
+    healthcheck:
+      # The orthanc image ships neither curl nor wget; python3 is the only probe available.
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8042/system', timeout=4)"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    container_name: aiml02-api
+    ports:
+      - "${API_PORT:-8000}:8000"   # host port is settable: 8000 is a busy number
+    environment:
+      MODEL_PATH: /models/densenet121_lungopacity.pt
+      UNET_PATH: /models/unet3d.pt
+      AUDIT_DB_URL: sqlite:////data/audit.db
+      ORTHANC_URL: http://orthanc:8042
+      ORTHANC_USERNAME: ${ORTHANC_USERNAME:-}
+      ORTHANC_PASSWORD: ${ORTHANC_PASSWORD:-}
+      LOG_LEVEL: INFO
+    volumes:
+      - ./artifacts:/models:ro
+      - audit-data:/data
+    depends_on:
+      orthanc:
+        condition: service_healthy
+    restart: unless-stopped
+
+  ingest:
+    build: .
+    container_name: aiml02-ingest
+    command: ["python", "-m", "src.ingest.orthanc_poller"]
+    environment:
+      MODEL_PATH: /models/densenet121_lungopacity.pt
+      AUDIT_DB_URL: sqlite:////data/audit.db
+      ORTHANC_URL: http://orthanc:8042
+      API_URL: http://api:8000
+      POLL_INTERVAL_SECONDS: "5"
+    volumes:
+      - ./artifacts:/models:ro
+      - audit-data:/data
+    # The image's HEALTHCHECK probes uvicorn on :8000, which this container does not run — it would always be
+    # unhealthy. The poller's own liveness is its log line per batch.
+    healthcheck:
+      disable: true
+    depends_on:
+      api:
+        # service_started is not enough: uvicorn binds the port only after the weights load, and the poller
+        # would burn its first study on a refused connection.
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  orthanc-db:
+  audit-data:

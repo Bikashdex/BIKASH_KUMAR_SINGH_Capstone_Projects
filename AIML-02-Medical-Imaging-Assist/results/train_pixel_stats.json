@@ -1,0 +1,13 @@
+{
+  "n_images": 416,
+  "mean": {
+    "mean": 125.4813635968245,
+    "std": 21.822924879698093
+  },
+  "std": {
+    "mean": 58.34318006973055,
+    "std": 10.666094564624363
+  },
+  "computed_from": "train split only",
+  "note": "reference distribution for the Phase 4 PSI drift monitor"
+}

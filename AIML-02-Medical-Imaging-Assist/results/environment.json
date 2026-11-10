@@ -1,0 +1,30 @@
+{
+  "generated": "2026-10-23 20:11",
+  "note": "This is the environment that actually produced results/baseline_metrics.json and the executed notebooks. It is NOT requirements.txt: torch==2.4.1 has no cp313 wheels, so this project's local development ran on the interpreter already installed. The pinned file is the Docker/Colab target.",
+  "produced_by": [
+    "notebooks/01_eda.ipynb",
+    "notebooks/02_baseline_logreg.ipynb"
+  ],
+  "python": "3.13.1",
+  "platform": "Windows 10 AMD64",
+  "packages": {
+    "numpy": "2.4.3",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.9.1",
+    "pydicom": "3.0.2",
+    "matplotlib": "3.10.8",
+    "torch": "2.11.0",
+    "torchvision": "0.26.0",
+    "Pillow": "12.1.0",
+    "dvc": "3.55.1",
+    "dvc-gdrive": "3.0.1"
+  },
+  "requirements_txt_pins": {
+    "torch": "2.4.1",
+    "torchvision": "0.19.1",
+    "numpy": "1.26.4",
+    "pydicom": "3.0.1",
+    "scikit-learn": "1.5.2"
+  },
+  "divergence_risk": "A reviewer who builds the pinned 3.11 environment gets numpy 1.x and torch 2.4; pixel arrays and CNN features can differ in the last bits. The baseline metrics below are stable to 4 decimals across two local runs, but exact cross-environment reproduction is not claimed."
+}
