@@ -16,7 +16,7 @@ End-to-end MLOps pipeline with Kafka streaming, XGBoost + GraphSAGE ensemble, Fe
 
 **Cloud Deployments (Live):**
 - 🔗 **Live API:** https://aiml-01-fraud-platform.onrender.com/docs
--  **Live Dashboard:** https://aiml-01-fraud-platform.streamlit.app
+- 🔗**Live Dashboard:** https://aiml-01-fraud-platform.streamlit.app
 
 ### 🔹 AIML-02: AI-Assisted Medical Imaging and Diagnosis System
 
