@@ -23,7 +23,7 @@ End-to-end MLOps pipeline with Kafka streaming, XGBoost + GraphSAGE ensemble, Fe
 Deep learning platform for X-ray/CT/MRI scan analysis with CNN models, Grad-CAM explainability heatmaps, and doctor review workflow.
 
 **Cloud Deployments (Live):**
-- 🔗 **Live API:** https://aiml-01-fraud-platform.onrender.com/docs
+- 🔗 **Live API:** https://aiml-02-medical-imaging-assist.onrender.com/docs
 - 🔗 **Live Demo:** https://aiml-02-medical-imaging-assist.onrender.com
 
 ---
