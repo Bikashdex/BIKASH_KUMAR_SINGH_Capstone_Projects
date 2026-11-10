@@ -6,6 +6,10 @@ FastAPI microservice, monitored by Evidently AI drift detection (PSI), and
 closed by a human-in-the-loop Streamlit analyst workbench with automated
 retraining.
 
+🔗 Live API: https://aiml-01-fraud-platform.onrender.com/docs
+
+🔗Live Dashboard: https://aiml-01-fraud-platform.streamlit.app
+
 ## 🏗️ Architecture
 
 ```mermaid
